@@ -2,12 +2,14 @@ import express from 'express'
 import config from 'config'
 import log from "./utils/logger";
 import connectToDb from "./utils/connectToDb";
-import routes from './routes'
+import routes from './routes';
 
 
-const port = config.get<number>('port')
+const port = config.get<number>('port');
 
-const app = express()
+const app = express();
+
+app.use(express.json());
 
 app.listen(port, () => {
     connectToDb();
