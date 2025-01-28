@@ -5,6 +5,13 @@ import {createUserSchema} from "./schemas/user.schema";
 import {createUserSessionHandler, getUserSessionsHandler} from "./controllers/session.controller";
 import {createSessionSchema} from "./schemas/session.schema";
 import requireUser from "./middleware/requireUser";
+import {createBookSchema, deleteBookSchema, getBookSchema, updateBookSchema} from "./schemas/book.schema";
+import {
+    createBookHandler,
+    deleteBookHandler,
+    getBookHandler,
+    updateBookHandler
+} from "./controllers/book.controller";
 
 function routes(app: Express) {
     app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200));
@@ -23,6 +30,26 @@ function routes(app: Express) {
         '/api/sessions',
         requireUser,
         getUserSessionsHandler);
+
+    app.post(
+        '/api/books',
+        [requireUser, validateResource(createBookSchema)],
+        createBookHandler)
+
+    app.put(
+        '/api/books/:bookId',
+        [requireUser, validateResource(updateBookSchema)],
+        updateBookHandler)
+
+    app.get(
+        '/api/books/:bookId',
+        validateResource(getBookSchema),
+        getBookHandler)
+
+    app.delete(
+        '/api/books/:bookId',
+        [requireUser, validateResource(deleteBookSchema)],
+        deleteBookHandler)
 }
 
 export default routes;
