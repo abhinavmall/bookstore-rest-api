@@ -18,4 +18,4 @@ Note: default config already has sample-keys for checking.
 * Update mongo db uri
 * Update private and public keys. Note: default config already has sample-keys for checking.
 * Run yarn dev
-* Postman collection could be used for testing [Postman collection](Bookstore%20Api.postman_collection.json)
+* [Postman collection](Bookstore%20Api.postman_collection.json) could be used for testing
