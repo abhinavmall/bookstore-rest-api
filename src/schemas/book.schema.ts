@@ -42,7 +42,11 @@ export const getBookSchema = object({
     ...params,
 });
 
+export const getAllBookSchema = object({
+});
+
 export type CreateBookInput = TypeOf<typeof createBookSchema>;
 export type UpdateBookInput = TypeOf<typeof updateBookSchema>;
 export type ReadBookInput = TypeOf<typeof getBookSchema>;
+export type ReadAllBookInput = TypeOf<typeof getAllBookSchema>;
 export type DeleteBookInput = TypeOf<typeof deleteBookSchema>;

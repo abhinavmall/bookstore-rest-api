@@ -25,6 +25,18 @@ export async function findBook(
     }
 }
 
+export async function findAllBook(
+    query: FilterQuery<BookDocument>,
+    options: QueryOptions = { lean: true }
+) {
+    try {
+        const result = await BookModel.find({}, {}, options);
+        return result;
+    } catch (e) {
+        throw e;
+    }
+}
+
 export async function findAndUpdateBook(
     query: FilterQuery<BookDocument>,
     update: UpdateQuery<BookDocument>,

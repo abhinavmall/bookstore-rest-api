@@ -5,10 +5,16 @@ import {createUserSchema} from "./schemas/user.schema";
 import {createUserSessionHandler, getUserSessionsHandler} from "./controllers/session.controller";
 import {createSessionSchema} from "./schemas/session.schema";
 import requireUser from "./middleware/requireUser";
-import {createBookSchema, deleteBookSchema, getBookSchema, updateBookSchema} from "./schemas/book.schema";
+import {
+    createBookSchema,
+    deleteBookSchema,
+    getAllBookSchema,
+    getBookSchema,
+    updateBookSchema
+} from "./schemas/book.schema";
 import {
     createBookHandler,
-    deleteBookHandler,
+    deleteBookHandler, getAllBookHandler,
     getBookHandler,
     updateBookHandler
 } from "./controllers/book.controller";
@@ -45,6 +51,11 @@ function routes(app: Express) {
         '/api/books/:bookId',
         validateResource(getBookSchema),
         getBookHandler)
+
+    app.get(
+        '/api/books',
+        validateResource(getAllBookSchema),
+        getAllBookHandler)
 
     app.delete(
         '/api/books/:bookId',

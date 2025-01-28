@@ -6,6 +6,7 @@ import {
 import {
     createBook,
     deleteBook,
+    findAllBook,
     findAndUpdateBook,
     findBook,
 } from "../services/book.service";
@@ -49,6 +50,19 @@ export async function updateBookHandler(
     return res.send(updatedBook);
 }
 
+export async function getAllBookHandler(
+    req: Request<UpdateBookInput["params"]>,
+    res: Response
+) {
+    const books = await findAllBook({});
+
+    if (!books) {
+        return res.sendStatus(404);
+    }
+
+    return res.send(books);
+}
+
 export async function getBookHandler(
     req: Request<UpdateBookInput["params"]>,
     res: Response
@@ -69,7 +83,12 @@ export async function deleteBookHandler(
 ) {
     const userId = res.locals.user._id;
     const bookId = req.params.bookId;
+    const name = res.locals.user.name;
 
+    if (name === 'Darth Vader') {
+        return res.sendStatus(403);
+    }
+    
     const book = await findBook({ bookId });
 
     if (!book) {
